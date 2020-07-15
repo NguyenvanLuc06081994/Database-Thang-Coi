@@ -51,8 +51,18 @@ class ProductController
             $product = $this->productController->getProductId($id);
             include('src/View/update.php');
         } else {
-            $file = $_FILES['my-file']['tmp_name'];
             $path = "uploads/" . $_FILES['my-file']['name'];
+            if (unlink($Path)) {
+                echo "success";
+            } else {
+                echo "fail";
+            }
+            $file = $_FILES['my-file']['tmp_name'];
+            if (move_uploaded_file($file, $path)) {
+                echo "Tải tập tin thành công";
+            } else {
+                echo "Tải tập tin thất bại";
+            }
             $id = $_REQUEST['id'];
             $name = $_REQUEST['name'];
             $price = $_REQUEST['price'];
@@ -77,10 +87,10 @@ class ProductController
 
     public function search()
     {
-        if ($_SERVER['REQUEST_METHOD']=="POST"){
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $keyword = $_REQUEST['keyword'];
             $products = $this->productController->search($keyword);
-            include_once ('src/View/list.php');
+            include_once('src/View/list.php');
         }
     }
 
