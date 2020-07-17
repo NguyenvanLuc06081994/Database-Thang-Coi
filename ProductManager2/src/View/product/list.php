@@ -28,7 +28,7 @@
                     <td><?php echo $product->getDescription() ?></td>
                     <td><a href="index.php?page=update-product&id=<?php echo $product->getId() ?>"
                            class="btn btn-primary">Update</a></td>
-                    <td><a href="index.php?page=delete-product&id=<?php echo $product->getId() ?>"
+                    <td><a onclick="return confirm('Are You Sure?')" href="index.php?page=delete-product&id=<?php echo $product->getId() ?>"
                            class="btn btn-danger">Delete</a></td>
                 </tr>
             <?php endforeach; ?>

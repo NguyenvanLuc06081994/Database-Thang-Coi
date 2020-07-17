@@ -1,9 +1,15 @@
 <?php
 
+use App\Controller\BillController;
+use App\Controller\CustomerController;
+use App\Controller\DetailController;
 use App\Controller\ProductController;
 
 require __DIR__ . "/vendor/autoload.php";
-$controller = new ProductController();
+$products = new ProductController();
+$customers = new CustomerController();
+$bills = new BillController();
+$details = new DetailController();
 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 ?>
 <!doctype html>
@@ -22,25 +28,52 @@ $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
     <?php include 'src/View/menu/navbar.php' ?>
     <?php switch ($page) {
         case "list-product":
-            $controller->getAll();
+            $products->getAll();
             break;
         case "add-product":
-            $controller->add();
+            $products->add();
             break;
         case "update-product":
-            $controller->update();
+            $products->update();
             break;
         case "delete-product":
-            $controller->delete();
+            $products->delete();
             break;
         case "search-product":
-            $controller->search();
+            $products->search();
             break;
         case "return-product":
-            $controller->returnView();
+            $products->returnView();
+            break;
+        case "list-customer":
+            $customers->getAll();
+            break;
+        case "add-customer":
+            $customers->add();
+            break;
+        case "update-customer":
+            $customers->update();
+            break;
+        case "delete-customer":
+            $customers->delete();
+            break;
+        case "list-bill":
+            $bills->getAll();
+            break;
+        case  "add-bill":
+            $bills->add();
+            break;
+        case "delete-bill":
+            $bills->delete();
+            break;
+        case "list-detail":
+            $details->getAll();
+            break;
+        case "add-detail":
+            $details->add();
             break;
         default:
-            $controller->getAll();
+            $bills->getAll();
     } ?>
 </div>
 

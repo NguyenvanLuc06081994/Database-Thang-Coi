@@ -17,13 +17,13 @@ class ProductController
     public function getAll()
     {
         $products = $this->productController->getAll();
-        include('src/View/list.php');
+        include('src/View/product/list.php');
     }
 
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            include('src/View/add.php');
+            include('src/View/product/add.php');
         } else {
             $file = $_FILES['my-file']['tmp_name'];
             $path = "uploads/" . $_FILES['my-file']['name'];
@@ -49,14 +49,9 @@ class ProductController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = $_REQUEST['id'];
             $product = $this->productController->getProductId($id);
-            include('src/View/update.php');
+            include('src/View/product/update.php');
         } else {
             $path = "uploads/" . $_FILES['my-file']['name'];
-            if (unlink($Path)) {
-                echo "success";
-            } else {
-                echo "fail";
-            }
             $file = $_FILES['my-file']['tmp_name'];
             if (move_uploaded_file($file, $path)) {
                 echo "Tải tập tin thành công";
@@ -90,7 +85,7 @@ class ProductController
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $keyword = $_REQUEST['keyword'];
             $products = $this->productController->search($keyword);
-            include_once('src/View/list.php');
+            include_once('src/View/product/list.php');
         }
     }
 

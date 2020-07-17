@@ -18,7 +18,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="index.php?page=add-product">Add new product</a>
-                    <a class="dropdown-item" href="#"> </a>
+                    <a class="dropdown-item" href="index.php?page=list-customer">List Customer </a>
+                    <a class="dropdown-item" href="index.php?page=list-bill">List Bill </a>
+                    <a class="dropdown-item" href="index.php?page=list-detail">List Detail </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">  </a>
                 </div>

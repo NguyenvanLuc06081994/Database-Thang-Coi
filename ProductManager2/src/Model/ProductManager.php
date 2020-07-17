@@ -32,12 +32,12 @@ class ProductManager
     {
         $sql = "INSERT INTO `products`(`img`, `name`, `price`, `quantity`, `vender`, `description`) VALUES (:img, :name, :price, :quantity, :vender, :description)";
         $stmt = $this->database->prepare($sql);
-        $stmt->bindParam(':img',$product->getImg());
-        $stmt->bindParam(':name',$product->getName());
-        $stmt->bindParam(':price',$product->getPrice());
-        $stmt->bindParam(':quantity',$product->getQuantity());
-        $stmt->bindParam(':vender',$product->getVender());
-        $stmt->bindParam(':description',$product->getDescription());
+        $stmt->bindParam(':img', $product->getImg());
+        $stmt->bindParam(':name', $product->getName());
+        $stmt->bindParam(':price', $product->getPrice());
+        $stmt->bindParam(':quantity', $product->getQuantity());
+        $stmt->bindParam(':vender', $product->getVender());
+        $stmt->bindParam(':description', $product->getDescription());
         $stmt->execute();
     }
 
@@ -55,13 +55,13 @@ class ProductManager
     {
         $sql = "UPDATE `products` SET `img`= :img,`name`=:name,`price`=:price,`quantity`= :quantity,`vender`= :vender,`description`= :description WHERE id = :id";
         $stmt = $this->database->prepare($sql);
-        $stmt->bindParam(':img',$product->getImg());
-        $stmt->bindParam(':name',$product->getName());
-        $stmt->bindParam(':price',$product->getPrice());
-        $stmt->bindParam(':quantity',$product->getQuantity());
-        $stmt->bindParam(':vender',$product->getVender());
-        $stmt->bindParam(':description',$product->getDescription());
-        $stmt->bindParam(':id',$product->getId());
+        $stmt->bindParam(':img', $product->getImg());
+        $stmt->bindParam(':name', $product->getName());
+        $stmt->bindParam(':price', $product->getPrice());
+        $stmt->bindParam(':quantity', $product->getQuantity());
+        $stmt->bindParam(':vender', $product->getVender());
+        $stmt->bindParam(':description', $product->getDescription());
+        $stmt->bindParam(':id', $product->getId());
         $stmt->execute();
     }
 
@@ -69,7 +69,7 @@ class ProductManager
     {
         $sql = "DELETE FROM `products` WHERE id = :id";
         $stmt = $this->database->prepare($sql);
-        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 
@@ -77,16 +77,33 @@ class ProductManager
     {
         $sql = "SELECT * FROM `products` WHERE name LIKE :keyword";
         $stmt = $this->database->prepare($sql);
-        $stmt->bindValue(':keyword','%'.$keyword.'%');
+        $stmt->bindValue(':keyword', '%' . $keyword . '%');
         $stmt->execute();
         $data = $stmt->fetchAll();
         $arr = [];
-        foreach ($data as $key=> $item){
-            $product = new Product($item['img'],$item['name'], $item['price'], $item['quantity'], $item['vender'], $item['description']);
+        foreach ($data as $key => $item) {
+            $product = new Product($item['img'], $item['name'], $item['price'], $item['quantity'], $item['vender'], $item['description']);
             $product->setId($item['id']);
-            array_push($arr,$product);
+            array_push($arr, $product);
         }
         return $arr;
+    }
+
+    public function getAllIdProduct()
+    {
+        $sql = "SELECT id FROM products";
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+
+    }
+
+    public function getAllNameProduct()
+    {
+        $sql = "SELECT name FROM products";
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
 
